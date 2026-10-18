@@ -136,7 +136,7 @@
     disposers.push(()=>{stopped=true;cancelAnimationFrame(raf);canvas.remove();});
   }
   const clear=()=>{while(disposers.length)disposers.pop()();};
-  window.siteMotion={clear,mount(){clear();if(reduced())return;followIcon();followEyes();celebration();enhancedCards();}};
+  window.siteMotion={clear,mount(){clear();if(reduced())return;followIcon();celebration();enhancedCards();}};
   // A change in system motion preferences takes effect without reloading the site.
   matchMedia('(prefers-reduced-motion:reduce)').addEventListener('change',()=>window.siteMotion.mount());
 })();
