@@ -12,7 +12,7 @@ const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>'
 // The design sheets stay intact. CSS windows display only the selected artwork.
 function slice(src,size,box,alt='',className=''){
   const [w,h]=size,[x,y,cw,ch]=box;
-  return `<span class="slice ${className}" style="--ar:${cw}/${ch};--iw:${w/cw*100}%;--ix:${-x/cw*100}%;--iy:${-y/ch*100}%"><img src="${src}" alt="${escapeHTML(alt)}" loading="lazy"></span>`;
+  return `<span class="slice ${className}" role="img" aria-label="${escapeHTML(alt)}" style="--ar:${cw}/${ch};background-image:url('${src}');background-size:${w/cw*100}% ${h/ch*100}%;background-position:${w===cw?0:x/(w-cw)*100}% ${h===ch?0:y/(h-ch)*100}%;background-repeat:no-repeat"></span>`;
 }
 function material(src,size,box,alt){return `<button class="material" data-image="${src}" data-caption="${escapeHTML(alt)}" data-box="${box.join(',')}" data-size="${size.join(',')}" aria-label="放大查看：${escapeHTML(alt)}">${slice(src,size,box,alt)}<span class="material-caption"><span>${alt}</span><span>点击查看 ↗</span></span></button>`;}
 function footer(){return `<footer><nav class="footer-nav" aria-label="页尾导航">${pages.map(p=>`<a href="#/${p.id}">${p.label}</a>`).join('')}</nav><div class="foot"><a href="#/">© ${new Date().getFullYear()} LI SHUYAO</a><a href="#/about?section=information">Let's start ↗</a></div></footer>`;}
